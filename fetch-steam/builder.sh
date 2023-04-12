@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $stdenv/setup.sh
+source $stdenv/setup
 
 # Hack to prevent DepotDownloader from crashing trying to write to
 # ~/.local/share/
