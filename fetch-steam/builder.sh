@@ -8,7 +8,6 @@ source $stdenv/setup
 HOME="${out:?}/fakehome"
 
 args=(
-  -debug
   -app "${appId:?}"
   -depot "${depotId:?}"
   -manifest "${manifestId:?}"
@@ -16,6 +15,10 @@ args=(
 
 if [ -n "$branch" ]; then
   args+=(-branch "$branch")
+fi
+
+if [ -n "$debug" ]; then
+  args+=(-debug)
 fi
 
 DepotDownloader \

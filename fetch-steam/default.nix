@@ -5,6 +5,7 @@
   cacert,
 }: {
   name,
+  debug ? false,
   appId,
   depotId,
   manifestId,
@@ -13,7 +14,7 @@
 }:
 stdenvNoCC.mkDerivation {
   name = "${name}-depot";
-  inherit appId depotId manifestId branch;
+  inherit debug appId depotId manifestId branch;
   builder = ./builder.sh;
   buildInputs = [
     depotdownloader
