@@ -8,6 +8,7 @@ source $stdenv/setup
 HOME="${out:?}/fakehome"
 
 args=(
+  -debug
   -app "${appId:?}"
   -depot "${depotId:?}"
   -manifest "${manifestId:?}"
