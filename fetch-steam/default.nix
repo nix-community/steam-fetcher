@@ -13,7 +13,7 @@
 stdenvNoCC.mkDerivation {
   name = "${name}-depot";
   builder = ./builder.sh;
-  nativeBuildInputs = [
+  buildInputs = [
     depotdownloader
   ];
 

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+source $stdenv/setup.sh
+
+# Hack to prevent DepotDownloader from crashing trying to write to
+# ~/.local/share/
+# Need to clean up after DepotDownloader has finished.
 HOME="${out:?}/fakehome"
 
 args=(
