@@ -21,3 +21,9 @@ fi
 DepotDownloader \
   "${args[@]}" \
   -dir "$out"
+
+# Clean up DepotDownloader leftovers not belonging to the Steam app we just
+# downloaded.
+rm -rf \
+  $HOME \
+  "${out:?}/.DepotDownloader"
