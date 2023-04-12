@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 source $stdenv/setup
 
@@ -12,8 +12,10 @@ args=(
   -depot "$depotId"
   -manifest "$manifestId"
 )
+echo "Base args: ${args[@]}"
 
 if [ -n "$branch" ]; then
+  echo "Branch is set, so adding to arg list: $branch"
   args+=(-branch "$branch")
 fi
 
