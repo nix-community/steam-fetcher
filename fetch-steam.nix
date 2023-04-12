@@ -1,6 +1,6 @@
 {
   lib,
-  runCommand,
+  stdenvNoCC,
   depotdownloader,
 }: {
   name,
@@ -10,17 +10,24 @@
   branch ? null,
   hash,
 }:
-runCommand "${name}-depot" {
-  buildInputs = [depotdownloader];
+stdenvNoCC.mkDerivation {
+  name = "${name}-depot";
+
+  buildInputs = [
+    depotdownloader
+  ];
+
+  builder = ''
+    HOME="$out/fakehome"
+    DepotDownloader \
+      -app "${appId}" \
+      -depot "${depotId}" \
+      -manifest "${manifestId}" \
+      ${lib.optionalString (branch != null) "-branch \"${branch}\""} \
+      -dir "$out"
+  '';
+
   outputHash = hash;
   outputHashAlgo = "sha256";
   outputHashMode = "recursive";
-} ''
-  HOME="$out/fakehome"
-  DepotDownloader \
-    -app "${appId}" \
-    -depot "${depotId}" \
-    -manifest "${manifestId}" \
-    ${lib.optionalString (branch != null) "-branch \"${branch}\""} \
-    -dir "$out"
-''
+}
