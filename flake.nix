@@ -23,28 +23,9 @@
           statix
         ];
       in {
-        packages.fetchSteam = {
-          name,
-          appId,
-          depotId,
-          manifestId,
-          branch ? null,
-          hash,
-        }:
-          pkgs.runCommand "${name}-depot" {
-            buildInputs = [pkgs.depotdownloader];
-            outputHash = hash;
-            outputHashAlgo = "sha256";
-            outputHashMode = "recursive";
-          } ''
-            HOME="$out/fakehome"
-            DepotDownloader \
-              -app "${appId}" \
-              -depot "${depotId}" \
-              -manifest "${manifestId}" \
-              ${pkgs.lib.optionalString (branch != null) "-branch \"${branch}\""} \
-              -dir "$out"
-          '';
+        lib = {
+          fetchSteam = pkgs.callPackage ./fetch-steam.nix {};
+        };
 
         checks = builtins.mapAttrs (name: pkgs.runCommandLocal name {nativeBuildInputs = linters;}) {
           alejandra = "alejandra --check ${./.} > $out";
