@@ -1,0 +1,2 @@
+# `fetchSteam`
+This flake contains a single function: `fetchSteam`.  This is a Nix fetcher for Steam apps that wraps [DepotDownloader](https://github.com/SteamRE/DepotDownloader) from [nixpkgs](https://search.nixos.org/packages?query=depotdownloader).  While this could theoretically be used for installing Steam games on a graphical system, it is aimed at NixOS modules for game servers distributed via Steam.
