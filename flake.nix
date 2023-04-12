@@ -24,7 +24,7 @@
         ];
       in {
         lib = {
-          fetchSteam = pkgs.callPackage ./fetch-steam.nix {};
+          fetchSteam = pkgs.callPackage ./fetch-steam {};
         };
 
         checks = builtins.mapAttrs (name: pkgs.runCommandLocal name {nativeBuildInputs = linters;}) {
