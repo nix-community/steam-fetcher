@@ -1,5 +1,5 @@
 #!/bin/bash
-
+if [ -e .attrs.sh ]; then source .attrs.sh; fi
 source $stdenv/setup
 
 # Hack to prevent DepotDownloader from crashing trying to write to
@@ -8,9 +8,9 @@ source $stdenv/setup
 HOME="${out:?}/fakehome"
 
 args=(
-  -app "$appId"
-  -depot "$depotId"
-  -manifest "$manifestId"
+  -app "${appId:?}"
+  -depot "${depotId:?}"
+  -manifest "${manifestId:?}"
 )
 echo "Base args: ${args[@]}"
 
