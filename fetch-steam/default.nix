@@ -2,6 +2,7 @@
   lib,
   stdenvNoCC,
   depotdownloader,
+  cacert,
 }: {
   name,
   appId,
@@ -14,6 +15,9 @@ stdenvNoCC.mkDerivation {
   name = "${name}-depot";
   inherit appId depotId manifestId branch;
   builder = ./builder.sh;
+  nativeBuiltInputs = [
+    cacert
+  ];
   buildInputs = [
     depotdownloader
   ];
