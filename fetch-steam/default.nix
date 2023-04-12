@@ -12,6 +12,7 @@
 }:
 stdenvNoCC.mkDerivation {
   name = "${name}-depot";
+  inherit appId depotId manifestId branch;
   builder = ./builder.sh;
   buildInputs = [
     depotdownloader
