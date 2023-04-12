@@ -15,12 +15,10 @@ stdenvNoCC.mkDerivation {
   name = "${name}-depot";
   inherit appId depotId manifestId branch;
   builder = ./builder.sh;
-  nativeBuiltInputs = [
-    cacert
-  ];
   buildInputs = [
     depotdownloader
   ];
+  SSL_CERT_FILE = "${cacert}/etc/ssl/certs/ca-bundle.crt";
 
   outputHash = hash;
   outputHashAlgo = "sha256";
