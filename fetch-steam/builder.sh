@@ -8,25 +8,25 @@ source $stdenv/setup
 HOME="${out:?}/fakehome"
 
 args=(
-  -app "${appId:?}"
-  -depot "${depotId:?}"
-  -manifest "${manifestId:?}"
+	-app "${appId:?}"
+	-depot "${depotId:?}"
+	-manifest "${manifestId:?}"
 )
 
 if [ -n "$branch" ]; then
-  args+=(-branch "$branch")
+	args+=(-branch "$branch")
 fi
 
 if [ -n "$debug" ]; then
-  args+=(-debug)
+	args+=(-debug)
 fi
 
 DepotDownloader \
-  "${args[@]}" \
-  -dir "$out"
+	"${args[@]}" \
+	-dir "$out"
 
 # Clean up DepotDownloader leftovers not belonging to the Steam app we just
 # downloaded.
 rm -rf \
-  $HOME \
-  "${out:?}/.DepotDownloader"
+	$HOME \
+	"${out:?}/.DepotDownloader"

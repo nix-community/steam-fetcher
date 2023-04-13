@@ -21,14 +21,29 @@
         linters = with pkgs; [
           alejandra
           statix
+          shellcheck
+          shfmt
         ];
       in {
         lib = {
           fetchSteam = pkgs.callPackage ./fetch-steam {};
         };
 
+        devShells = {
+          default = pkgs.mkShell {
+            packages = with pkgs;
+              [
+                nil # Nix LS
+                nodePackages.bash-language-server
+              ]
+              ++ linters;
+          };
+        };
+
         checks = builtins.mapAttrs (name: pkgs.runCommandLocal name {nativeBuildInputs = linters;}) {
           alejandra = "alejandra --check ${./.} > $out";
+          shellcheck = "shellcheck $(${pkgs.shfmt}/bin/shfmt --find ${./.}) > $out";
+          shfmt = "shfmt --simplify --diff ${./.} > $out";
           statix = "statix check ${./.} > $out";
         };
 
@@ -38,6 +53,7 @@
           text = ''
             alejandra --quiet .
             statix fix .
+            shfmt --simplify --write .
           '';
         };
       });
