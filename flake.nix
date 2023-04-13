@@ -15,9 +15,6 @@
       eachDefaultSystem (system: let
         pkgs = import nixpkgs {inherit system;};
 
-        # Generate a user-friendly version number.
-        version = builtins.substring 0 8 self.lastModifiedDate;
-
         linters = with pkgs; [
           alejandra
           statix
