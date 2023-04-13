@@ -26,6 +26,12 @@
           fetchSteam = pkgs.callPackage ./fetch-steam {};
         };
 
+        packages = {
+          steamworksSdkRedist = pkgs.callPackage ./steamworks-sdk-redist {
+            inherit (self.lib.${system}) fetchSteam;
+          };
+        };
+
         devShells = {
           default = pkgs.mkShell {
             packages = with pkgs;
