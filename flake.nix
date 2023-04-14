@@ -27,7 +27,7 @@
         };
 
         packages = {
-          steamworksSdkRedist = pkgs.callPackage ./steamworks-sdk-redist {
+          steamworks-sdk-redist = pkgs.callPackage ./steamworks-sdk-redist {
             inherit (self.lib.${system}) fetchSteam;
           };
         };
