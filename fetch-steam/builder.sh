@@ -1,6 +1,7 @@
 #!/bin/bash
+# shellcheck source=/dev/null
 if [ -e .attrs.sh ]; then source .attrs.sh; fi
-source $stdenv/setup
+source "${stdenv:?}/setup"
 
 # Hack to prevent DepotDownloader from crashing trying to write to
 # ~/.local/share/
@@ -28,5 +29,5 @@ DepotDownloader \
 # Clean up DepotDownloader leftovers not belonging to the Steam app we just
 # downloaded.
 rm -rf \
-	$HOME \
+	"$HOME" \
 	"${out:?}/.DepotDownloader"
