@@ -43,8 +43,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Steamworks SDK shared library";
     homepage = "https://steamdb.info/app/1007/";
-    # TODO: Figure out how to allow nonfree packages from flakes.
-    # license = licenses.unfreeRedistributable;
+    license = licenses.unfreeRedistributable;
     maintainers = with maintainers; [aidalgol];
     platforms = ["i686-linux" "x86_64-linux"];
   };

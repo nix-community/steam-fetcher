@@ -12,7 +12,7 @@
     flake-utils,
   }:
     with flake-utils.lib;
-      eachSystem ["x86_64-linux"] (system: let
+      eachDefaultSystem (system: let
         pkgs = import nixpkgs {inherit system;};
 
         linters = with pkgs; [
@@ -22,16 +22,6 @@
           shfmt
         ];
       in {
-        lib = {
-          fetchSteam = pkgs.callPackage ./fetch-steam {};
-        };
-
-        packages = {
-          steamworks-sdk-redist = pkgs.callPackage ./steamworks-sdk-redist {
-            inherit (self.lib.${system}) fetchSteam;
-          };
-        };
-
         devShells = {
           default = pkgs.mkShell {
             packages = with pkgs;
@@ -59,5 +49,11 @@
             shfmt --simplify --write .
           '';
         };
-      });
+      })
+      // {
+        overlays.default = final: prev: {
+          fetchSteam = final.callPackage ./fetch-steam {};
+          steamworks-sdk-redist = final.callPackage ./steamworks-sdk-redist {};
+        };
+      };
 }
