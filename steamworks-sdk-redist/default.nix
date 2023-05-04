@@ -6,13 +6,13 @@
 }:
 stdenv.mkDerivation rec {
   name = "steamworks-sdk-redist";
-  version = "15150439";
+  version = "18639946";
   src = fetchSteam {
     inherit name;
     appId = "1007";
     depotId = "1006";
-    manifestId = "4444585935428744334";
-    hash = "sha256-H991sXcAzQsEEiHC/Q1a/qA6iIZTTzOJOpY2rGegNHs=";
+    manifestId = "6912453647411644579";
+    hash = "sha256-V1CAYHAFz/TRUyJU8m6Jf/LlM6d9QhGZt6VKAoNn5Ho=";
   };
 
   # Skip phases that don't apply to prebuilt binaries.
