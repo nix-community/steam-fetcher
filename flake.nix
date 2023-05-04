@@ -14,6 +14,11 @@
     with flake-utils.lib;
     # DepotDownloader only supports x86_64 Linux.
       eachSystem ["x86_64-linux"] (system: let
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+          overlays = [self.overlays.default];
+        };
 
         linters = with pkgs; [
           alejandra
@@ -33,12 +38,16 @@
           };
         };
 
-        checks = builtins.mapAttrs (name: pkgs.runCommandLocal name {nativeBuildInputs = linters;}) {
-          alejandra = "alejandra --check ${./.} > $out";
-          shellcheck = "shellcheck $(${pkgs.shfmt}/bin/shfmt --find ${./.}) > $out";
-          shfmt = "shfmt --simplify --diff ${./.} > $out";
-          statix = "statix check ${./.} > $out";
-        };
+        checks =
+          builtins.mapAttrs (name: pkgs.runCommandLocal name {nativeBuildInputs = linters;}) {
+            alejandra = "alejandra --check ${./.} > $out";
+            shellcheck = "shellcheck $(${pkgs.shfmt}/bin/shfmt --find ${./.}) > $out";
+            shfmt = "shfmt --simplify --diff ${./.} > $out";
+            statix = "statix check ${./.} > $out";
+          }
+          // {
+            inherit (pkgs) steamworks-sdk-redist;
+          };
 
         formatter = pkgs.writeShellApplication {
           name = "fmt";
