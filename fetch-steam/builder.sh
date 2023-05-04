@@ -5,8 +5,8 @@ source "${stdenv:?}/setup"
 
 # Hack to prevent DepotDownloader from crashing trying to write to
 # ~/.local/share/
-# Need to clean up after DepotDownloader has finished.
-HOME="${out:?}/fakehome"
+export HOME
+HOME=$(mktemp -d)
 
 args=(
 	-app "${appId:?}"
@@ -24,10 +24,4 @@ fi
 
 DepotDownloader \
 	"${args[@]}" \
-	-dir "$out"
-
-# Clean up DepotDownloader leftovers not belonging to the Steam app we just
-# downloaded.
-rm -rf \
-	"$HOME" \
-	"${out:?}/.DepotDownloader"
+	-dir "${out:?}"
