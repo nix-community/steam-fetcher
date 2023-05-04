@@ -12,8 +12,8 @@
     flake-utils,
   }:
     with flake-utils.lib;
-      eachDefaultSystem (system: let
-        pkgs = import nixpkgs {inherit system;};
+    # DepotDownloader only supports x86_64 Linux.
+      eachSystem ["x86_64-linux"] (system: let
 
         linters = with pkgs; [
           alejandra
