@@ -15,7 +15,7 @@ args=(
 )
 
 if [ -n "$branch" ]; then
-	args+=(-branch "$branch")
+	args+=(-beta "$branch")
 fi
 
 if [ -n "$debug" ]; then
