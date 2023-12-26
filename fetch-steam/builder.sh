@@ -22,6 +22,10 @@ if [ -n "$debug" ]; then
 	args+=(-debug)
 fi
 
+if [ -n "$filelist" ]; then
+	args+=(-filelist "$filelist")
+fi
+
 DepotDownloader \
 	"${args[@]}" \
 	-dir "${out:?}"
