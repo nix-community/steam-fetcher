@@ -25,6 +25,8 @@ stdenv.mkDerivation rec {
     # branch = "beta_name";
     # Enable debug logging from DepotDownloader.
     # debug = true;
+    # Only download specific files
+    # fileList = ["filename" "regex:(or|a|regex)"];
     hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
   };
 
