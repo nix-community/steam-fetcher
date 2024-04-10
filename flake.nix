@@ -66,7 +66,7 @@
       });
 
     overlays.default = final: prev: {
-      fetchSteam = final.callPackage ./fetch-steam {};
+      fetchSteam = final.callPackage ./fetch-steam {inherit (prev) depotdownloader;};
       steamworks-sdk-redist = final.callPackage ./steamworks-sdk-redist {};
     };
   };
