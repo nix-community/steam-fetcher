@@ -29,3 +29,4 @@ fi
 DepotDownloader \
 	"${args[@]}" \
 	-dir "${out:?}"
+rm -rf "${out:?}/.DepotDownloader"
