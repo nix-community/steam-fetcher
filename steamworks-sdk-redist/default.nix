@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
     appId = "1007";
     depotId = "1006";
     manifestId = "6912453647411644579";
-    hash = "sha256-V1CAYHAFz/TRUyJU8m6Jf/LlM6d9QhGZt6VKAoNn5Ho=";
+    hash = "sha256-cj853Zk3dU0WICny3soTFppWkf8NJBp6C+Ywb96Yxcs=";
   };
 
   # Skip phases that don't apply to prebuilt binaries.
