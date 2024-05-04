@@ -65,17 +65,9 @@
         '';
       });
 
-    overlays.default = final: prev: let
-      pkgs = pkgsFor final.system;
-    in rec {
-      fetchSteam = final.callPackage ./fetch-steam {inherit (pkgs) depotdownloader;};
+    overlays.default = final: prev: {
+      fetchSteam = final.callPackage ./fetch-steam {};
       steamworks-sdk-redist = final.callPackage ./steamworks-sdk-redist {};
     };
-
-    packages = forAllSystems (system: let
-      pkgs = pkgsFor system;
-    in rec {
-      inherit (pkgs) steamworks-sdk-redist;
-    });
   };
 }
