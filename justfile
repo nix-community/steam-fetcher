@@ -4,6 +4,9 @@ find-nix := "find -not -path './npins/*' -name '*.nix'"
 @default:
   just --list
 
+[private]
+cicd: shellcheck shfmt-check nixfmt-check
+
 [group('lint')]
 shellcheck:
     shellcheck **/*.sh

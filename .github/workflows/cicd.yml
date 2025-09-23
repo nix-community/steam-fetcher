@@ -1,0 +1,33 @@
+name: "CI/CD"
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: canidae-solutions/lix-quick-install-action@v3
+      with:
+        github_access_token: ${{ secrets.GH_ACCESS_TOKEN }}
+    - run: nix-shell --run 'just shellcheck'
+
+  shfmt:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: canidae-solutions/lix-quick-install-action@v3
+      with:
+        github_access_token: ${{ secrets.GH_ACCESS_TOKEN }}
+    - run: nix-shell --run 'just shfmt'
+
+  nixfmt:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: canidae-solutions/lix-quick-install-action@v3
+      with:
+        github_access_token: ${{ secrets.GH_ACCESS_TOKEN }}
+    - run: nix-shell --run 'just nixfmt'
